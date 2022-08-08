@@ -41,7 +41,11 @@ const port = process.env.PORT || 3000
 // 设置路由
 app.get('/', handlers.home)
 
-app.get('/about',handlers.about)
+// app.get('/about',handlers.about)
+
+// 测试文件上传
+app.get('/fileupload-test',handlers.uploadtest)
+app.post('/fileupload',handlers.upload)
 
 //测试sections辅助函数 
 app.get('/sections',handlers.sections)
