@@ -10,6 +10,7 @@
   "author": "Ethan Brown <e@zepln.com>",
   "license": "(MIT OR GPL-3.0)",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.16.3",
     "express-handlebars": "^3.1.0"
   },

@@ -1,5 +1,6 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
+const bodyParser = require('body-parser')
 const handlers = require('./lib/handlers')
 const weatherMiddlware = require('./lib/middleware/weather')
 
@@ -23,6 +24,11 @@ app.set('view engine', 'handlebars')
 // 启用天气中间件
 app.use(weatherMiddlware)
 
+// 启用解析(以URL编码的)请求的body的中间件
+app.use(bodyParser.urlencoded({ extended: true }))
+// 启用解析json格式的中间件
+app.use(bodyParser.json())
+
 // Express会自动识别以下两个参数
 // 所以这里需要禁用no-undef规则
 /* eslint-disable no-undef */
@@ -39,6 +45,12 @@ app.get('/about',handlers.about)
 
 //测试sections辅助函数 
 app.get('/sections',handlers.sections)
+
+//新增邮件订阅页，表单处理和感谢订阅页路由
+app.get('/newsletter',handlers.newsletter)
+app.post('/api/newsletter-signup',handlers.api.newsletterSignup)
+app.post('/newsletter-signup/process',handlers.newsletterSignupProcess)
+app.get('/newsletter-signup/thank-you',handlers.newsletterSignupThankYou)
 
 // 定制404页
 app.use(handlers.notFound)
