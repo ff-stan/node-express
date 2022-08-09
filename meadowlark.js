@@ -32,6 +32,7 @@ app.use(bodyParser.json())
 // Express会自动识别以下两个参数
 // 所以这里需要禁用no-undef规则
 /* eslint-disable no-undef */
+// 设置静态文件路径
 app.use(express.static(__dirname + '/public'))
 
 const port = process.env.PORT || 3000
@@ -45,16 +46,20 @@ app.get('/', handlers.home)
 
 // 测试文件上传
 app.get('/fileupload-test',handlers.uploadtest)
-app.post('/fileupload',handlers.upload)
+app.post('/api/fileupload',handlers.upload)
 
 //测试sections辅助函数 
 app.get('/sections',handlers.sections)
 
 //新增邮件订阅页，表单处理和感谢订阅页路由
 app.get('/newsletter',handlers.newsletter)
+app.get('/newsletter-signup',handlers.newsletterSignup)
 app.post('/api/newsletter-signup',handlers.api.newsletterSignup)
 app.post('/newsletter-signup/process',handlers.newsletterSignupProcess)
 app.get('/newsletter-signup/thank-you',handlers.newsletterSignupThankYou)
+
+//图片上传页面
+app.get('/vacation-photo',handlers.vacationPhoto)
 
 // 定制404页
 app.use(handlers.notFound)
