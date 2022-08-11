@@ -5,3 +5,4 @@ node_modules
 #(OSX), *.bak, etc.
 *~
 .DS_Store
+.credentials.*
